@@ -31,7 +31,8 @@ http.createServer(function (req, res) {
 			console.log(body);
 			let options = {
 				uri: query.url,
-				headers: body.headers
+				headers: body.headers,
+				method: body.method || 'GET'
 			};
 
 			let proxyCallback = function (proxyErr, proxyRes, proxyBody) {
@@ -40,6 +41,7 @@ http.createServer(function (req, res) {
 					res.statusCode = 500;
 					res.write(proxyErr);
 				} else {
+					res.writeHead(proxyRes.statusCode, proxyRes.headers);
 					res.write(proxyBody);
 				}
 				res.end();
