@@ -35,7 +35,7 @@ http.createServer(function (req, res) {
 				method: body.method || 'GET'
 			};
 
-			let proxyCallback = function (proxyErr, proxyRes, proxyBody) {
+			let proxyCallback = (proxyErr, proxyRes, proxyBody) => {
 				if (proxyErr) {
 					console.log(proxyErr);
 					res.statusCode = 500;
